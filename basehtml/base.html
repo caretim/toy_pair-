@@ -29,7 +29,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="{% url 'movies:movie_info' %}">Link</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -37,12 +37,13 @@
                             Dropdown
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '액션' %}" name="genre">액션</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '스릴러' %}" name="genre">스릴러</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '코미디' %}" name="genre">코미디</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '로맨스' %}" name="genre">로맨스</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' 'SF' %}" name="genre">SF</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '드라마' %}" name="genre">드라마</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '애니메이션' %}" name="genre">애니메이션</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

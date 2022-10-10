@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import MovieForm, ReviewForm
 from .models import Movie, Review
 
+# Create your views here.
 
 def index(request):
     reviews = Review.objects.all()
@@ -46,5 +47,29 @@ def search(request):
 
     return render(request, "movies/index.html", context)
 
+def movie_info(request):
+    movies = Movie.objects.all()
+    context = {
+        'movies':movies
+    }
+    return render(request, 'movies/movie_info.html', context)
 
-# Create your views here.
+def movie_create(request):
+    if request.method == "POST":
+        form_M = MovieForm(request.POST)
+        if form_M.is_valid():
+            form_M.save()
+            return redirect("movies:movie_info")
+    else:
+        form_M = MovieForm()
+    context = {"form_M": form_M}
+
+    return render(request, "movies/movie_create.html", context)
+
+def genre_search(request, genre):
+    genre = genre
+    movies = Movie.objects.filter(genre=genre)
+    context = {
+        "movies":movies
+    }
+    return render(request, 'movies/movie_info.html', context)
