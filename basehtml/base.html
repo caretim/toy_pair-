@@ -29,6 +29,16 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link active" href="{% url 'users:logout' %}">{{ user.username }}님 로그아웃</a>
+                        {% else %}
+                        <a class="nav-link active" href="{% url 'users:login' %}">로그인</a>
+                        {% endif %}
+
+
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'movies:movie_info' %}">Link</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -37,13 +47,20 @@
                             Dropdown
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '액션' %}" name="genre">액션</a></li>
-                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '스릴러' %}" name="genre">스릴러</a></li>
-                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '코미디' %}" name="genre">코미디</a></li>
-                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '로맨스' %}" name="genre">로맨스</a></li>
-                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' 'SF' %}" name="genre">SF</a></li>
-                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '드라마' %}" name="genre">드라마</a></li>
-                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '애니메이션' %}" name="genre">애니메이션</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '액션' %}" name="genre">액션</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '스릴러' %}"
+                                    name="genre">스릴러</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '코미디' %}"
+                                    name="genre">코미디</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '로맨스' %}"
+                                    name="genre">로맨스</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' 'SF' %}" name="genre">SF</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '드라마' %}"
+                                    name="genre">드라마</a></li>
+                            <li><a class="dropdown-item" href="{% url 'movies:genre_search' '애니메이션' %}"
+                                    name="genre">애니메이션</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
