@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>
+    영화 업데이트!
+  </h1>
+  <form action="{% url 'movies:movie_update' j.pk %}" method="POST">
+    {% csrf_token %}
+    {% load static %}
+    {% load django_bootstrap5 %}
+    {% bootstrap_form form_R %}
+    <input type="submit" class="btn btn-outline-success" value="업데이트">
+  </form>
+{% endblock %}

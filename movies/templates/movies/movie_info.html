@@ -8,6 +8,8 @@
     리뷰쓰기</a>
 
   {% for movie in movies %}
-    <p>{{ movie.movie_title }}</p>
+    <a href="{% url 'movies:movie_detail' movie.pk %}">
+      <p>{{ movie.movie_title }}</p>
+    </a>
   {% endfor %}
 {%endblock %}

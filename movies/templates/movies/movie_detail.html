@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h3>
+    제목 :
+    {{movie.movie_title}}</h3>
+  <p>
+    장르 :
+    {{movie.genre}}</p>
+  <h5>
+    줄거리 요약 :
+    {{movie.summary}}</h5>
+  <p>
+    개봉 날짜 :
+    {{movie.start_at}}</p>
+  <a href="{% url 'movies:delete' movie.pk %}" type="button" class="btn btn-outline-success">삭제</a>
+  <a href="{% url 'movies:movie_update' movie.pk%}" type="button" class="btn btn-outline-success">수정</a>
+{% endblock %}

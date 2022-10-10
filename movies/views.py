@@ -1,8 +1,10 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from .forms import MovieForm, ReviewForm
 from .models import Movie, Review
 
 # Create your views here.
+
 
 def index(request):
     reviews = Review.objects.all()
@@ -26,9 +28,9 @@ def create(request):
 
 
 def delete(reuqest, pk):
-    Review.objects.get(pk=pk).delete()
+    Movie.objects.get(pk=pk).delete()
 
-    return redirect("movies:index")
+    return redirect("movies:movie_info")
 
 
 def search(request):
@@ -47,12 +49,12 @@ def search(request):
 
     return render(request, "movies/index.html", context)
 
+
 def movie_info(request):
     movies = Movie.objects.all()
-    context = {
-        'movies':movies
-    }
-    return render(request, 'movies/movie_info.html', context)
+    context = {"movies": movies}
+    return render(request, "movies/movie_info.html", context)
+
 
 def movie_create(request):
     if request.method == "POST":
@@ -66,10 +68,35 @@ def movie_create(request):
 
     return render(request, "movies/movie_create.html", context)
 
+
 def genre_search(request, genre):
     genre = genre
     movies = Movie.objects.filter(genre=genre)
+    context = {"movies": movies}
+    return render(request, "movies/movie_info.html", context)
+
+
+def movie_detail(request, pk):
+    k = Movie.objects.get(pk=pk)
+    j = k.movie_title
     context = {
-        "movies":movies
+        "movie": k,
     }
-    return render(request, 'movies/movie_info.html', context)
+    return render(request, "movies/movie_detail.html", context)
+
+
+def movie_update(request, pk):
+    k = Movie.objects.get(pk=pk)
+    if request.method == "POST":
+        form_R = MovieForm(request.POST, instance=k)
+        if form_R.is_valid():
+            form_R.save()
+            return redirect("/", k.pk)
+    else:
+        form_R = MovieForm(instance=k)
+    context = {
+        "form_R": form_R,
+        "j": k,
+    }
+
+    return render(request, "movies/movie_update.html", context)
